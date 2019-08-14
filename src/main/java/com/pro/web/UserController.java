@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.neo.service.UserService;
 import com.pro.entity.User;
+import com.pro.service.UserService;
 
 @Controller
 public class UserController {

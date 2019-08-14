@@ -1,10 +1,10 @@
-package com.pro.repository;
+package com.pro.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.pro.entity.User;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserDao extends JpaRepository<User, Long> {
 
     User findById(long id);
 
