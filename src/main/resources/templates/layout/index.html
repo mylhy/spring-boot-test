@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html th:fragment="layout (title,content)" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:replace="${title}">Layout Title</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/animate.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    
+</head>
+
+<body>
+    <div id="wrapper">
+	    <!--/* 侧边栏 */-->
+	    <nav th:replace="layout/header :: header"></nav>
+	        <div id="page-wrapper" class="gray-bg">
+		        <div class="row border-bottom">
+	    			<nav th:replace="layout/nav :: nav"></nav>
+		        </div>
+		        <!--/* 主体   */-->
+	            <div th:replace="${content}">
+	            	<h2>欢迎您inspinia中文</h2>
+	            	
+	            </div>
+	            
+	            <!-- /* 底部 */ -->
+				<div th:replace="layout/footer :: footer"></div>
+        	</div>
+        </div>
+    <!-- Mainly scripts -->
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/metisMenu.js}"></script>
+    <script th:src="@{/js/slimscroll.min.js}"></script>
+    <!-- Custom and plugin javascript -->
+    <script th:src="@{/js/inspinia.js}"></script>
+    <script th:src="@{/js/pace.min.js}"></script>
+    
+</body>
+
+</html>
