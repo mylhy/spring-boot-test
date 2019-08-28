@@ -12,17 +12,13 @@ import com.pro.entity.User;
 import com.pro.service.UserService;
 
 @Controller
+@RequestMapping("user")
 public class UserController {
 
     @Resource
     UserService userService;
-
-
-    @RequestMapping("/")
-    public String index() {
-        return "redirect:/list";
-    }
-
+    
+    
     @RequestMapping("/list")
     public String list(Model model) {
         List<User> users=userService.getUserList();
