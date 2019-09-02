@@ -2,6 +2,8 @@ package com.pro.web;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
@@ -19,9 +21,9 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(Model model, String name, String password) {
+	public String login(Model model, String userName, String password) {
 		Subject subject = SecurityUtils.getSubject();
-		UsernamePasswordToken token = new UsernamePasswordToken(name, password);
+		UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
 		try {
 			subject.login(token);
 			Session session = subject.getSession();
@@ -29,14 +31,21 @@ public class LoginController {
 			return "redirect:index";
 
 		} catch (AuthenticationException e) {
-			model.addAttribute("error", "验证失败");
+			String msg="";
+			if (UnknownAccountException.class.getName().equals(e.getClass().getName())) {
+                msg = "UnknownAccountException -- > 账号不存在：";
+            } else if (IncorrectCredentialsException.class.getName().equals(e.getClass().getName())) {
+                msg = "IncorrectCredentialsException -- > 密码不正确：";
+            } else if ("kaptchaValidateFailed".equals(e.getClass().getName())) {
+                msg = "kaptchaValidateFailed -- > 验证码错误";
+            } else {
+                msg = "else >> "+e;
+                e.printStackTrace();
+            }
+			model.addAttribute("error", msg);
+			model.addAttribute("userName", userName);
+			model.addAttribute("password", password);
 			return "login";
 		}
 	}
-	
-	@RequestMapping(value = "/index")
-	public String index() {
-			return "index";
-	}
-
 }

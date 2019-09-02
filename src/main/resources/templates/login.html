@@ -1,18 +1,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>index</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登陆界面模板</title>
+
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet">
+    <link th:href="@{/css/animate.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
-<body>
-    <div class="errorInfo" th:text="${error}"></div>
-	<form action="login" method="post">
-	    账号： <input type="text" value="admin" name="name"> <br>
-	    密码： <input type="password" value="123456" name="password"> <br>
-	    <br>
-	    <input type="submit" value="登录">
-	    
-	    
-	</form>
-	
+
+
+
+<body class="gray-bg">
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+
+        <div>
+            <div>
+                <h1 class="logo-name">TEST</h1>
+
+            </div>
+
+            <h3>欢迎登录inspinia中文（TEST）</h3>
+
+            <p>
+
+            </p>
+
+            <p>快乐游戏，欢乐至上</p>
+
+            <form class="m-t" role="form" th:action="@{/login}" method="post">
+
+                <div class="form-group">
+
+                    <input type="text" class="form-control" name="userName" placeholder="用户名" th:value="${userName}" value="admin"  required="">
+
+            
+                </div>
+
+                <div class="form-group">
+
+                    <input type="password" class="form-control" name="password" placeholder="密码" th:value="${password}" value="123456" required="">
+
+                </div>
+
+                <button type="submit" class="btn btn-primary block full-width m-b">登录</button>
+
+
+                <a href="#"><small>忘记密码?</small></a>
+
+                <p class="text-muted text-center"><small>还没有账号?</small></p>
+
+                <a class="btn btn-sm btn-white btn-block" href="register.html">创建一个帐户</a>
+
+            </form>
+
+            <p class="m-t"> <small>Copyright</strong> inspinia中文 &copy; 2017-2018</small> </p>
+
+        </div>
+
+    </div>
+
+    <!-- Mainly scripts -->
+
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+
+
 </body>
 </html>

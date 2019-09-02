@@ -48,7 +48,6 @@ public class ShiroDataRealm extends AuthorizingRealm {
         if(username == null){
             return null;
         }
-        System.out.println(token.getCredentials());
         UserInfo userInfo = userInfoService.findByUsername(username);
         if(userInfo == null){
             return null;
