@@ -12,21 +12,34 @@ import com.pro.entity.UserInfo;
 import com.pro.service.UserInfoService;
 
 @Controller
-@RequestMapping("user")
+@RequestMapping("userInfo")
 public class UserInfoController {
 
     @Resource
     UserInfoService userInfoService;
+
+    /**
+     * 用户注册
+     * @param model
+     * @return
+     */
+    @RequestMapping("/register")
+    public String register(Model model,String username,String password) {
+    	userInfoService.register(username,password);
+        return "user/list";
+    }
     
     
-    @RequestMapping("/list")
+
+    
+    @RequestMapping("/userList")
     public String list(Model model) {
         List<UserInfo> users=userInfoService.findAll();
         model.addAttribute("users", users);
         return "user/list";
     }
 
-    @RequestMapping("/toAdd")
+    @RequestMapping("/userAdd")
     public String toAdd() {
         return "user/userAdd";
     }

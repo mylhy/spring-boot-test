@@ -9,9 +9,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("")
 public class PageController {
 
-	@RequestMapping("index")
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login() {
+		return "login";
+	}
+	
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public String register() {
+		return "register";
+	}
+	
+	@RequestMapping("/index")
 	public String index() {
 		return "index";
+	}
+	@RequestMapping("/403")
+	public String noPerms() {
+		return "403";
 	}
 
 	@RequestMapping("deleteOrder")
@@ -29,14 +43,5 @@ public class PageController {
 		return "listProduct";
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login() {
-		return "login";
-	}
-
-	@RequestMapping("403")
-	public String noPerms() {
-		return "403";
-	}
 
 }

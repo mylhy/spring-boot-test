@@ -82,7 +82,6 @@ public class SysPermissionService{
 		Set<String> result = new HashSet<>();
 
 		UserInfo userInfo=UserInfoDao.findByUsername(userName);
-		
 		List<SysRole> SysRoles = userInfo.getRoleList();
 
 		for (SysRole sysRole : SysRoles) {

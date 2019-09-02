@@ -6,7 +6,7 @@
     <title>登陆界面模板</title>
 
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link th:href="@{/css/font-awesome.css}" rel="stylesheet">
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet">
     <link th:href="@{/css/animate.css}" rel="stylesheet">
     <link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
@@ -34,17 +34,20 @@
 
                 <div class="form-group">
 
-                    <input type="text" class="form-control" name="userName" placeholder="用户名" th:value="${userName}" value="admin"  required="">
-
+<!--                     <input type="text" class="form-control" name="userName" placeholder="用户名" th:value="${userName}" value="admin"  required=""> -->
+					<input type="text" class="form-control" name="userName" placeholder="用户名"  value="admin" >
             
                 </div>
 
                 <div class="form-group">
 
-                    <input type="password" class="form-control" name="password" placeholder="密码" th:value="${password}" value="123456" required="">
+<!--                     <input type="password" class="form-control" name="password" placeholder="密码" th:value="${password}" value="123456" required=""> -->
+                    <input type="password" class="form-control" name="password" placeholder="密码" value="123456" >
 
                 </div>
 
+                <span class=text-danger th:text="${error}"></span>
+                
                 <button type="submit" class="btn btn-primary block full-width m-b">登录</button>
 
 
@@ -52,7 +55,7 @@
 
                 <p class="text-muted text-center"><small>还没有账号?</small></p>
 
-                <a class="btn btn-sm btn-white btn-block" href="register.html">创建一个帐户</a>
+                <a class="btn btn-sm btn-white btn-block" th:href="@{/register}">创建一个帐户</a>
 
             </form>
 

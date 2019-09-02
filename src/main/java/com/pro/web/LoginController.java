@@ -15,11 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("")
 public class LoginController {
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login() {
-		return "login";
-	}
-	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(Model model, String userName, String password) {
 		Subject subject = SecurityUtils.getSubject();
@@ -28,16 +23,17 @@ public class LoginController {
 			subject.login(token);
 			Session session = subject.getSession();
 			session.setAttribute("subject", subject);
+			session.setAttribute("userName", userName);
 			return "redirect:index";
 
 		} catch (AuthenticationException e) {
 			String msg="";
 			if (UnknownAccountException.class.getName().equals(e.getClass().getName())) {
-                msg = "UnknownAccountException -- > 账号不存在：";
+                msg = "账号不存在";
             } else if (IncorrectCredentialsException.class.getName().equals(e.getClass().getName())) {
-                msg = "IncorrectCredentialsException -- > 密码不正确：";
+                msg = "密码不正确";
             } else if ("kaptchaValidateFailed".equals(e.getClass().getName())) {
-                msg = "kaptchaValidateFailed -- > 验证码错误";
+                msg = "验证码错误";
             } else {
                 msg = "else >> "+e;
                 e.printStackTrace();
@@ -47,5 +43,5 @@ public class LoginController {
 			model.addAttribute("password", password);
 			return "login";
 		}
-	}
+	}	
 }
