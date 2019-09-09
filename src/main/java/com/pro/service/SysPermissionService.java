@@ -20,25 +20,6 @@ public class SysPermissionService{
 	private SysPermissionDao sysPermissionDao;
 	@Autowired
 	private UserInfoDao UserInfoDao;
-
-	public Set<String> listSysPermissions(String userName) {
-		Set<String> result = new HashSet<>();
-		
-		UserInfo userInfo=UserInfoDao.findByUsername(userName);
-		
-		List<SysRole> SysRoles = userInfo.getRoleList();
-
-		for (SysRole sysRole : SysRoles) {
-			for (SysPermission sysPermission : sysRole.getPermissions()) {
-				result.add(sysPermission.getName());
-			}
-		}
-
-		
-
-		return result;
-	}
-
 	
 	public void add(SysPermission u) {
 		sysPermissionDao.save(u);
@@ -59,13 +40,13 @@ public class SysPermissionService{
 	}
 
 	
-	public List<SysPermission> list() {
+	public List<SysPermission> findAll() {
 		return sysPermissionDao.findAll();
 
 	}
 
 	public boolean needInterceptor(String requestURI) {
-		List<SysPermission> ps = list();
+		List<SysPermission> ps = findAll();
 		for (SysPermission p : ps) {
 			if (p.getUrl().equals(requestURI))
 				return true;
@@ -94,5 +75,6 @@ public class SysPermissionService{
 
 		return result;
 	}
+
 
 }
