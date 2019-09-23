@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登陆界面模板</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet">
+    
+    <style type="text/css">
+	    @keyframes fade-in {
+	    0% { opacity: 0; }
+	
+	    /*初始状态 透明度为0*/
+	    40% { opacity: 0; }
+	
+	    /*过渡状态 透明度为0*/
+	    100% { opacity: 1; }
+	
+		/*结束状态 透明度为1*/ }
+		@-webkit-keyframes fade-in {
+		
+		    /*针对webkit内核*/
+		    0% { opacity: 0; }
+		    40% { opacity: 0; }
+		    100% { opacity: 1; }
+		}
+		
+		#wrapper { animation: fade-in;/*动画名称*/ animation-duration: .6s;/*动画持续时间*/ -webkit-animation: fade-in .6s;/*针对webkit内核*/ }
+		
+	    .page-login:before {
+	    	position: fixed;
+	    	top: 0;
+	    	left: 0;
+	    	z-index: -1;
+	    	width: 100%;
+	    	height: 100%;
+	    	content: '';
+	    	background: #62a8ea;
+	    	background:url(/img/login_bg.jpg) center center/cover no-repeat !important;
+	    }
+	    .login-body {
+		    width: 400px;
+			background: rgba(255,255,255,0.6);
+		    border-radius: 4px;
+		    padding: 50px 40px 40px;
+		    float: right;
+			margin-right: 18%;
+		    margin-top: 15%;
+		}
+		.error{
+			color:red;
+		}
+	
+    </style>
+</head>
+
+<body class="page-login">
+
+	    <div id="wrapper" class="text-center login-body">
+	        <div class="login-content">
+               	<h2 class="form-group">小程序电商系统</h2>
+               	<div style="margin-top: 50px;">
+		            <form id="login-form" role="form" >
+	                    <input class="form-group form-control" name="userName" placeholder="请输入账号" type="text" minlength="2" required >
+	                    <input class="form-group form-control" name="password" placeholder="请输入密码" type="password" minlength="6" required >
+	                    <button id="btn-submit" class="btn btn-info btn-lg btn-block" type="submit"> 登录</button>
+		            </form>
+	            </div>
+	        </div>
+	    </div>
+	    
+</body>
+
+
+    <!-- Mainly scripts -->
+
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+	<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+	<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+	<script>
+	$.validator.setDefaults({
+	    submitHandler: function() {
+	      console.log("提交事件!");
+	    }
+	});
+	$().ready(function() {
+	    $("#login-form").validate();
+	});
+	</script>
+
+
+</body>
+</html>

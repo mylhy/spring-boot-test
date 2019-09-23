@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pro.entity.PageInfo;
 import com.pro.entity.UserInfo;
@@ -54,12 +55,16 @@ public class UserInfoController {
      * 添加用户
      */
     @RequestMapping("addUserInfo")
-	public String add(Model model, String name, String password) {
+	public String add(Model model, String username, String password,RedirectAttributes attr) {
     	//获取添加用户的管理员
-//		Subject subject = SecurityUtils.getSubject();
-//		UserInfo user=(UserInfo) subject.getPrincipal();
+		Subject subject = SecurityUtils.getSubject();
+		UserInfo user=(UserInfo) subject.getPrincipal();
 		
-		userInfoService.register(name,password);
+//		userInfoService.addUser(username,password,user);
+
+
+		attr.addFlashAttribute("username", username);
+		
 		return "redirect:/userInfo/userList";
 	}
 

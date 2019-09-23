@@ -50,7 +50,8 @@ public class UserInfoService{
      */
 	public Page<UserInfo> findAll(Map<String, String> queryMap,PageInfo pageInfo) {
 //		Pageable pageable=PageRequest.of(0, 20);
-		Pageable pageable = PageRequest.of(pageInfo.getPageNum(), pageInfo.getPageSize(), Sort.by(Direction.DESC, "createDate"));
+		//jpa分页是从0页开始
+		Pageable pageable = PageRequest.of(pageInfo.getPageNum()-1, pageInfo.getPageSize(), Sort.by(Direction.DESC, "createDate"));
         Specification<UserInfo> example = new Specification<UserInfo>() {
 			@Override
 			public Predicate toPredicate(Root<UserInfo> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
@@ -168,5 +169,23 @@ public class UserInfoService{
 	public boolean isRepeatUsername(String username) {
 		UserInfo user=userInfoDao.findByUsername(username);
 		return user==null?false:true;
+	}
+	/**
+	 * 添加用户
+	 * @param name 登录账号
+	 * @param password	登录密码
+	 * @param user	操作人
+	 */
+	public UserInfo addUser(String username, String password, UserInfo user) {
+		UserInfo userInfo=new UserInfo();
+		userInfo.setName("用户_"+System.currentTimeMillis());
+		userInfo.setSalt(new SecureRandomNumberGenerator().nextBytes().toString());
+		userInfo.setUsername(username);
+		userInfo.setPassword(new SimpleHash("md5",password,userInfo.getCredentialsSalt(),2).toString());
+		userInfo.setCreateDate(new Timestamp(System.currentTimeMillis()));
+		userInfo.setCreateUser(user.getUid());
+		
+		userInfoDao.save(userInfo);
+		return userInfo;
 	}
 }
