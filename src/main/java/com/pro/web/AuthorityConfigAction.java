@@ -105,8 +105,8 @@ public class AuthorityConfigAction {
 	/**
 	 * 查询权限
 	 */
-	@RequestMapping("getRoleList")
-	public String findAll(Model model){
+	@RequestMapping("getPermissionList")
+	public String findPermissionList(Model model){
 		List<SysPermission> rList=sysPermissionService.findAll();
 		model.addAttribute("roles", rList);
 		return "/role/list";

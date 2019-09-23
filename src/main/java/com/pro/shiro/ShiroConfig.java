@@ -1,7 +1,9 @@
 package com.pro.shiro;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -26,16 +28,25 @@ public class ShiroConfig {
 		//拦截器.
 		Map<String,String> filterChainDefinitionMap = new LinkedHashMap<String,String>();
 		// 配置不会被拦截的链接 顺序判断
-
-		filterChainDefinitionMap.put("/favicon.ico", "anon");
 		
-		filterChainDefinitionMap.put("/css/**", "anon");
-		filterChainDefinitionMap.put("/fonts/**", "anon");
-		filterChainDefinitionMap.put("/img/**", "anon");
-		filterChainDefinitionMap.put("/js/**", "anon");
+		//定义list<String>,添加不用验证的url
+		List<String> anonList=new ArrayList<String>();
 
-        filterChainDefinitionMap.put("/login", "anon");
-		filterChainDefinitionMap.put("/register", "anon");
+		anonList.add("/favicon.ico");
+		anonList.add("/css/**");
+		anonList.add("/fonts/**");
+		anonList.add("/img/**");
+		anonList.add("/js/**");
+
+		anonList.add("/login");
+		anonList.add("/register");
+		anonList.add("/repeat*");
+
+		for (String str : anonList) {
+			filterChainDefinitionMap.put(str, "anon");
+		}
+		
+//		filterChainDefinitionMap.put("/repeat", "anon");
 		
 		//配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了
 		filterChainDefinitionMap.put("/logout", "logout");

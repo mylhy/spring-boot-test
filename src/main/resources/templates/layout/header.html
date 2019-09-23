@@ -15,8 +15,10 @@
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> 
-                            	<span class="block m-t-xs"> <strong class="font-bold" th:text="${session.subject.principal.name}">王宇</strong>
-                             </span> <span class="text-muted text-xs block" th:text="${session.subject.principal.username}">管理员</span> </span> </a>
+                            	<span class="block m-t-xs"> 
+                            		<strong class="font-bold" th:text="${session.subject.principal.name}">王宇</strong>
+                             	</span> 
+                             	<span class="text-muted text-xs block" th:text="${session.subject.principal.username}">管理员</span> </span> </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                 <li><a href="profile.html">个人信息</a></li>
                                 <li><a href="mailbox.html">信箱</a></li>
@@ -43,10 +45,12 @@
                     </li>
                     
                     <li>
-                        <a href="#"><i class="fa fa-th-large"></i> 
+                        <a href="#"><i class="fa fa-gear (alias)"></i> 
                         <span class="nav-label">系统管理</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
-                            <li><a th:href="@{/product/list}">产品管理</a></li>
+                            <li><a th:href="@{/product/list}">用户管理</a></li>
+                            <li><a th:href="@{/config/getRoleList}">角色管理</a></li>
+                            <li><a th:href="@{/product/list}">权限管理</a></li>
                         </ul>
                     </li>
                     

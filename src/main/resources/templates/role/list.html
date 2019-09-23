@@ -12,7 +12,7 @@
                   <a href="/index" th:href="@{/index}">主页</a>
               </li>
               <li class="active">
-                  <strong>用户列表</strong>
+                  <strong>角色列表</strong>
               </li>
           </ol>
       </div>
@@ -22,7 +22,7 @@
   	<div class="col-lg-12">
       <div class="ibox">
       	<div class="ibox-title">
-                            用户列表
+                           角色列表
 		</div>
           <div class="ibox-content">
           <!-- Button trigger modal -->
@@ -34,29 +34,31 @@
                   <thead>
                   <tr>
                       <th>#</th>
-                      <th >User</th>
-                      <th >Name</th>
-                      <th >roles</th>
+                      <th >role</th>
+                      <th >描述</th>
+                      <th >禁用</th>
+                      <th >权限</th>
                       <th class="text-center">操作</th>
                   </tr>
                   </thead>
                   <tbody>
-					<tr class="footable-even" th:each="user : ${users}">
-			            <td scope="row" th:text="${userStat.count}">1</td>
-			            <td th:text="${user.username}">user</td>
-			            <td th:text="${user.name}">name</td>
+					<tr class="footable-even" th:each="obj : ${roles}">
+			            <td scope="row" th:text="${objStat.count}">1</td>
+			            <td th:text="${obj.role}">role</td>
+			            <td th:text="${obj.description}">description</td>
+			            <td th:text="${obj.available}">available</td>
 			            <td >
-			            	<span th:each="r : ${user.roleList}">
-			            		<span th:text="${r.role}"></span>
+			            	<span th:each="p : ${obj.permissions}">
+			            		<span th:text="${p.name}"></span>
 			            	</span>
 			            </td>
 			            <td class="text-center">
 			            	
-							<button type="button" class="btn btn-info assignRoles" th:attr="data-id=${user.uid}" >配置角色</button>
+							<button type="button" class="btn btn-info assignRoles" th:attr="data-id=${obj.id}" >配置权限</button>
 			            
 							<button type="button" class="btn btn-info">修改</button>
 			            
-							<a th:href="@{/userInfo/delete?id=}+${user.uid}" class="btn btn-danger" id="">删除</a>
+							<a th:href="@{/userInfo/delete?id=}+${obj.id}" class="btn btn-danger" id="">删除</a>
 							
 			            </td>
 			            
@@ -65,7 +67,7 @@
                     </tbody>
                     <tfoot>
                     <tr>
-                        <td colspan="5" class="footable-visible">
+                        <td colspan="6" class="footable-visible">
                             <ul class="pagination pull-right">
                             <li class="footable-page-arrow disabled">
                             <a data-page="first" href="#first">«</a></li>

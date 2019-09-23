@@ -1,22 +1,10 @@
 <!DOCTYPE html>
 <html th:replace="~{layout/index :: layout(~{::title}, ~{::section})}">
 <head>
-    <title>index</title>
+    <title>用户列表</title>
 </head>
+
 <section>
-<div class="row wrapper border-bottom white-bg page-heading">
-      <div class="col-lg-10">
-          <h2>用户管理</h2>
-          <ol class="breadcrumb">
-              <li>
-                  <a href="/index" th:href="@{/index}">主页</a>
-              </li>
-              <li class="active">
-                  <strong>用户列表</strong>
-              </li>
-          </ol>
-      </div>
-  </div>
 <div class="wrapper wrapper-content animated fadeInRight">
   <div class="row">
   	<div class="col-lg-12">
@@ -25,6 +13,17 @@
                             用户列表
 		</div>
           <div class="ibox-content">
+          
+  	<div class="row">
+  		<form role="form" th:action="@{/userInfo/userList}" method="post">
+    		  用户名：<input type="text" name="query_username" th:value="${query_username}">
+    		  
+    		  <div class="btn-group btn-group-sm">
+				<input type="submit" class="btn btn-success" value="搜索">
+			</div>
+   	  </form>
+   </div>
+          
           <!-- Button trigger modal -->
 			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
 			 	 添加
@@ -98,8 +97,12 @@
       <div class="modal-body">
         
         <form th:action="@{/userInfo/addUserInfo}" method="post">
-		            用户名: <input type="text" name="username"> <br>
-		            密码: <input type="password" name="password"> <br><br>
+        
+			  <input type="text" class="form-control" name="username" placeholder="username">
+			
+			
+			  <input type="password" class="form-control" name="password" placeholder="password" >
+			
         </form>  
         
       </div>
@@ -169,6 +172,8 @@
 		
 		
 		$(".assignRoles").on("click",function(){
+			 var sessionid = "";  //登陆后保存会话id
+			 console.log(sessionid)
 			var uid=$(this).attr("data-id");
 			console.log();
 			//查后台role

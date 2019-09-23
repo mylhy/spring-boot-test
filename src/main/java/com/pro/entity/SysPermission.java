@@ -1,6 +1,7 @@
 package com.pro.entity;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -13,7 +14,11 @@ import javax.persistence.ManyToMany;
 
 @Entity
 public class SysPermission implements Serializable {
-    @Id@GeneratedValue
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6693759054977981518L;
+	@Id@GeneratedValue
     private Integer id;//主键.
     private String name;//名称.
     @Column(columnDefinition="enum('menu','button')")
@@ -26,6 +31,17 @@ public class SysPermission implements Serializable {
     @ManyToMany
     @JoinTable(name="SysRolePermission",joinColumns={@JoinColumn(name="permissionId")},inverseJoinColumns={@JoinColumn(name="roleId")})
     private List<SysRole> roles;
+
+    @Column(name="create_date")
+    private Timestamp createDate;
+    @Column(name="create_user")
+    private Integer createUser;
+    @Column(name="update_date")
+    private Timestamp updateDate;
+    @Column(name="update_user")
+    private Integer updateUser;
+    
+    
 
     public Integer getId() {
         return id;
@@ -98,4 +114,37 @@ public class SysPermission implements Serializable {
     public void setRoles(List<SysRole> roles) {
         this.roles = roles;
     }
+
+	public Timestamp getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Timestamp createDate) {
+		this.createDate = createDate;
+	}
+
+	public Integer getCreateUser() {
+		return createUser;
+	}
+
+	public void setCreateUser(Integer createUser) {
+		this.createUser = createUser;
+	}
+
+	public Timestamp getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(Timestamp updateDate) {
+		this.updateDate = updateDate;
+	}
+
+	public Integer getUpdateUser() {
+		return updateUser;
+	}
+
+	public void setUpdateUser(Integer updateUser) {
+		this.updateUser = updateUser;
+	}
+    
 }

@@ -1,12 +1,23 @@
 package com.pro.entity;
 
-import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class UserInfo implements Serializable {
-    @Id
+	
+	private static final long serialVersionUID = 1204245087269756768L;
+	@Id
     @GeneratedValue
     private Integer uid;
     @Column(unique =true)
@@ -18,7 +29,17 @@ public class UserInfo implements Serializable {
     @ManyToMany(fetch= FetchType.EAGER)//立即从数据库中进行加载数据;
     @JoinTable(name = "SysUserRole", joinColumns = { @JoinColumn(name = "uid") }, inverseJoinColumns ={@JoinColumn(name = "roleId") })
     private List<SysRole> roleList;// 一个用户具有多个角色
-
+    
+    @Column(name="create_date")
+    private Timestamp createDate;
+    @Column(name="create_user")
+    private Integer createUser;
+    @Column(name="update_date")
+    private Timestamp updateDate;
+    @Column(name="update_user")
+    private Integer updateUser;
+    
+    
     public Integer getUid() {
         return uid;
     }
@@ -74,8 +95,40 @@ public class UserInfo implements Serializable {
     public void setRoleList(List<SysRole> roleList) {
         this.roleList = roleList;
     }
+    
+    public Timestamp getCreateDate() {
+		return createDate;
+	}
 
-    /**
+	public void setCreateDate(Timestamp createDate) {
+		this.createDate = createDate;
+	}
+
+	public Integer getCreateUser() {
+		return createUser;
+	}
+
+	public void setCreateUser(Integer createUser) {
+		this.createUser = createUser;
+	}
+
+	public Timestamp getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(Timestamp updateDate) {
+		this.updateDate = updateDate;
+	}
+
+	public Integer getUpdateUser() {
+		return updateUser;
+	}
+
+	public void setUpdateUser(Integer updateUser) {
+		this.updateUser = updateUser;
+	}
+
+	/**
      * 密码盐.
      * @return
      */
